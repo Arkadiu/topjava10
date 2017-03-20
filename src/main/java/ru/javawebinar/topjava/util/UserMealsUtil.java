@@ -57,9 +57,12 @@ public class UserMealsUtil {
         int exceedCalories = mealList
                 .stream()
                 .filter(meal -> TimeUtil.isBetween(meal.getTime(), startTime, endTime))
-                .reduce(0, (sum, m) -> sum += m.getCalories(), (sum1, sum2) -> sum1 + sum2);
+                //      .reduce(0, (sum, m) -> sum += m.getCalories(), (sum1, sum2) -> sum1 + sum2);
+                .map(meal -> meal.getCalories())
+                .reduce((sum1, sum2) -> sum1+sum2)
+                .orElse(0);
 
-        listResult = mealList.stream()
+                listResult = mealList.stream()
                 .filter(meal -> TimeUtil.isBetween(meal.getTime(), startTime, endTime))
                 .map(meal ->
                         new UserMealWithExceed(meal.getDateTime(), meal.getDescription(), meal.getCalories(),
