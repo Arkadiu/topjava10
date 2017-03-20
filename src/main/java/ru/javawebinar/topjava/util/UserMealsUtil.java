@@ -61,7 +61,6 @@ public class UserMealsUtil {
                 .mapToInt(meal -> meal.getCalories())
                 .sum();
 
-
                 listResult = mealList.stream()
                 .filter(meal -> TimeUtil.isBetween(meal.getTime(), startTime, endTime))
                 .map(meal ->
