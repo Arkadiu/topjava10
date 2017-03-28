@@ -10,6 +10,11 @@
 <html>
 <head>
     <title>Meal list</title>
+    <style type="text/css">
+        #exceed {
+            background: green;
+        }
+    </style>
 </head>
 <body>
 <h2><a href="index.html">Home</a></h2>
@@ -23,11 +28,14 @@
         <th> Exceed </th>
     </tr>
     <c:forEach items="${meals}" var="meal">
+        <c:if test="${meal.exceed}">
+            <c:out value="${red}"/>
+        </c:if>
         <tr>
             <td>${meal.dateTime}</td>
             <td>${meal.description}</td>
             <td>${meal.calories}</td>
-            <td>${meal.exceed}</td>
+            <td id="exceed">${meal.exceed}</td>
         </tr>
     </c:forEach>
 </table>

@@ -21,10 +21,8 @@ public class MealServlet extends HttpServlet {
     private static final Logger LOG = getLogger(MealServlet.class);
 
     private List<MealWithExceed> list =
-            MealsUtil.getFilteredWithExceeded(MealsUtil.getMealIml(),
-                    LocalTime.of(7, 0),
-                    LocalTime.of(12, 0),
-                    2000);
+            MealsUtil.getFilteredWithExceeded(
+                    MealsUtil.getMealIml(), LocalTime.MIN, LocalTime.MAX, 2000);
 
     @Override
 
