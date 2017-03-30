@@ -18,7 +18,7 @@
             text-align: center;
         }
 
-        #String {
+        #ID {
             font-style: italic;
         }
     </style>
@@ -33,7 +33,7 @@
         <th>Description</th>
         <th>Calories</th>
         <th>Exceed</th>
-        <th>String</th>
+        <th>ID</th>
     </tr>
     <c:forEach items="${meals}" var="meal">
         <%--
@@ -52,7 +52,7 @@
             <td>${meal.description}</td>
             <td>${meal.calories}</td>
             <td bgcolor=${color}>${meal.exceed}</td>
-            <td id="String">${meal.getDateString()}</td>
+            <td id="ID">${meal.id}</td>
         </tr>
     </c:forEach>
 </table>

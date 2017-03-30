@@ -60,7 +60,7 @@ public class MealDao {
             preparedStatement.setTimestamp(1, Timestamp.valueOf(meal.getDateTime()));
             preparedStatement.setString(2, meal.getDescription());
             preparedStatement.setInt(3, meal.getCalories());
-            preparedStatement.setInt(4, meal.getMealId());
+            preparedStatement.setInt(4, meal.getId());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -79,7 +79,7 @@ public class MealDao {
                 String description = rs.getString("description");
                 int calories = rs.getInt("calories");
                 Meal meal = new Meal(localDateTime, description, calories);
-                meal.setMealId(mealId);
+                meal.setId(mealId);
                 meals.add(meal);
             }
         } catch (SQLException e) {
@@ -101,7 +101,7 @@ public class MealDao {
                 String description = rs.getString("description");
                 int calories = rs.getInt("calories");
                 meal = new Meal(localDateTime, description, calories);
-                meal.setMealId(mealId);
+                meal.setId(mealId);
             }
         } catch (SQLException e) {
             e.printStackTrace();

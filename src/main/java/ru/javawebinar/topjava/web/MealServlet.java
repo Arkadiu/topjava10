@@ -26,14 +26,15 @@ public class MealServlet extends HttpServlet {
             MealsUtil.getFilteredWithExceeded(
                     MealsUtil.getMealIml(), LocalTime.MIN, LocalTime.MAX, 2000);
 
+/*
     public MealServlet() {
-
         dao = new MealDao();
     }
 
     private List<MealWithExceed> listFromDb =
             MealsUtil.getFilteredWithExceeded(
-                    dao.getAllMeals(), LocalTime.MIN, LocalTime.MAX, 2000);
+                    new MealDao().getAllMeals(), LocalTime.MIN, LocalTime.MAX, 2000);
+*/
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
