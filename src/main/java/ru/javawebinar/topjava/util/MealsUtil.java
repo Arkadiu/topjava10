@@ -1,5 +1,6 @@
 package ru.javawebinar.topjava.util;
 
+import ru.javawebinar.topjava.dao.MealDao;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.model.MealWithExceed;
 
@@ -26,12 +27,13 @@ public class MealsUtil {
     );
 
     public static void main(String[] args) {
-
+        System.out.println("*******************Фильтр потоком********************");
         List<MealWithExceed> mealsWithExceeded = getFilteredWithExceeded(MEALS, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
         mealsWithExceeded.forEach(System.out::println);
-
+        System.out.println("*******************Фильтр циклом*********************");
         System.out.println(getFilteredWithExceededByCycle(MEALS, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000));
-
+        System.out.println("*******************Работа с БД***********************");
+        new MealDao().getAllMeals().forEach(System.out::println);
     }
 
     public static List<Meal> getMealIml() {

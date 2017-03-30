@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+
 <html>
 <head>
     <title>Meal list</title>
@@ -16,6 +16,10 @@
         TD, TH {
             padding: 5px;
             text-align: center;
+        }
+
+        #String {
+            font-style: italic;
         }
     </style>
 </head>
@@ -25,26 +29,30 @@
 <table border="1">
     <caption>Таблица калорий</caption>
     <tr>
-        <th> DateTime</th>
-        <th> Description</th>
-        <th> Calories</th>
-        <th> Exceed</th>
+        <th>DateTime</th>
+        <th>Description</th>
+        <th>Calories</th>
+        <th>Exceed</th>
+        <th>String</th>
     </tr>
     <c:forEach items="${meals}" var="meal">
-        <c:choose>
-            <c:when test="${meal.exceed}">
-                <c:set var="color" value="red"/>
-            </c:when>
-            <c:otherwise>
-                <c:set var="color" value="green"/>
-            </c:otherwise>
-        </c:choose>
-
+        <%--
+               <c:choose>
+                   <c:when test="${meal.exceed}">
+                       <c:set var="color" value="red"/>
+                   </c:when>
+                   <c:otherwise>
+                       <c:set var="color" value="green"/>
+                   </c:otherwise>
+               </c:choose>
+       --%>
+        <c:set var="color" value="${meal.exceed ? 'red' : 'green'}"/>
         <tr>
             <td>${fn:replace(meal.dateTime,"T" ," ")}</td>
             <td>${meal.description}</td>
             <td>${meal.calories}</td>
             <td bgcolor=${color}>${meal.exceed}</td>
+            <td id="String">${meal.getDateString()}</td>
         </tr>
     </c:forEach>
 </table>

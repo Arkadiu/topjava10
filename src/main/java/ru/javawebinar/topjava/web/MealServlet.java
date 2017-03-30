@@ -1,6 +1,7 @@
 package ru.javawebinar.topjava.web;
 
 import org.slf4j.Logger;
+import ru.javawebinar.topjava.dao.MealDao;
 import ru.javawebinar.topjava.model.MealWithExceed;
 import ru.javawebinar.topjava.util.MealsUtil;
 
@@ -19,16 +20,25 @@ import static org.slf4j.LoggerFactory.getLogger;
  */
 public class MealServlet extends HttpServlet {
     private static final Logger LOG = getLogger(MealServlet.class);
+    private MealDao dao;
 
     private List<MealWithExceed> list =
             MealsUtil.getFilteredWithExceeded(
                     MealsUtil.getMealIml(), LocalTime.MIN, LocalTime.MAX, 2000);
 
-    @Override
+    public MealServlet() {
 
+        dao = new MealDao();
+    }
+
+    private List<MealWithExceed> listFromDb =
+            MealsUtil.getFilteredWithExceeded(
+                    dao.getAllMeals(), LocalTime.MIN, LocalTime.MAX, 2000);
+
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
         LOG.debug("redirect to Meals");
-
+        System.out.println(list);
         request.setAttribute("meals", list);
         getServletContext().getRequestDispatcher("/meals.jsp").forward(request, resp);
 
