@@ -34,6 +34,7 @@
         <th>Calories</th>
         <th>Exceed</th>
         <th>ID</th>
+        <th colspan="2">Action</th>
     </tr>
     <c:forEach items="${meals}" var="meal">
         <%--
@@ -53,9 +54,13 @@
             <td>${meal.calories}</td>
             <td bgcolor=${color}>${meal.exceed}</td>
             <td id="ID">${meal.id}</td>
+            <%--
+            <td><a href="MealServlet?action=edit&mealId=<c:out value="${meal.id}"/>">Update</a></td>
+            <td><a href="MealServlet?action=delete&mealId=<c:out value="${meal.id}"/>">Delete</a></td>
+            --%>
         </tr>
     </c:forEach>
 </table>
-
+<p><a href="MealServlet?action=insert">Add Meal</a></p>
 </body>
 </html>
