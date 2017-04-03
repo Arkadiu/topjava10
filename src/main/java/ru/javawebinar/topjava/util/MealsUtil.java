@@ -26,6 +26,7 @@ public class MealsUtil {
             new Meal(LocalDateTime.of(2015, Month.MAY, 31, 20, 0), "Ужин", 510)
     );
 
+
     public static int id = 1;
 
     public static void main(String[] args) {
