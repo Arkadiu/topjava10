@@ -27,6 +27,8 @@ public class MealsUtil {
         mealsWithExceeded.forEach(System.out::println);
 
         System.out.println(getFilteredWithExceededByCycle(MEALS, LocalTime.of(7, 0), LocalTime.of(12, 0), DEFAULT_CALORIES_PER_DAY));
+        System.out.println("***************************************");
+        MEALS.forEach(System.out::println);
     }
 
     public static List<MealWithExceed> getWithExceeded(Collection<Meal> meals, int caloriesPerDay) {
