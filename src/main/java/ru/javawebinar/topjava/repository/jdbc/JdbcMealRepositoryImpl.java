@@ -13,6 +13,7 @@ import ru.javawebinar.topjava.repository.MealRepository;
 
 import javax.sql.DataSource;
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -69,12 +70,14 @@ public class JdbcMealRepositoryImpl implements MealRepository {
 
     @Override
     public List<Meal> getAll(int userId) {
-        return jdbcTemplate.query("SELECT * FROM meals WHERE user_id=? ORDER BY date", ROW_MAPPER, userId);
+        return jdbcTemplate.query("SELECT * FROM meals WHERE user_id=? ORDER BY date DESC", ROW_MAPPER, userId);
     }
 
     @Override
     public List<Meal> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId) {
-        return jdbcTemplate.query("SELECT * FROM meals WHERE date>=? AND date <=? ORDER BY date",
-                ROW_MAPPER, startDate, endDate, userId);
+        List<Meal> list =
+                jdbcTemplate.query("SELECT * FROM meals WHERE date>=? AND date <=? AND user_id=? ORDER BY date DESC",
+                        ROW_MAPPER, startDate, endDate, userId);
+        return list.size() > 0 ? list : Collections.emptyList();
     }
 }

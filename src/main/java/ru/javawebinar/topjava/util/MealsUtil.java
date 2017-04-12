@@ -1,8 +1,10 @@
 package ru.javawebinar.topjava.util;
 
 import ru.javawebinar.topjava.model.Meal;
+import ru.javawebinar.topjava.repository.jdbc.JdbcMealRepositoryImpl;
 import ru.javawebinar.topjava.to.MealWithExceed;
 
+import javax.sql.DataSource;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -27,8 +29,11 @@ public class MealsUtil {
         mealsWithExceeded.forEach(System.out::println);
 
         System.out.println(getFilteredWithExceededByCycle(MEALS, LocalTime.of(7, 0), LocalTime.of(12, 0), DEFAULT_CALORIES_PER_DAY));
-        System.out.println("***************************************");
+        System.out.println("********************************************");
         MEALS.forEach(System.out::println);
+        System.out.println("*************Работа с базоой данных*********");
+
+        new JdbcMealRepositoryImpl( ).getAll(100000).forEach(System.out::println);
     }
 
     public static List<MealWithExceed> getWithExceeded(Collection<Meal> meals, int caloriesPerDay) {
