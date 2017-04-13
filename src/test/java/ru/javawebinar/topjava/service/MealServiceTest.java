@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.util.DateTimeUtil;
 import ru.javawebinar.topjava.util.DbPopulator;
+import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -19,6 +20,7 @@ import java.util.stream.Stream;
 
 import static java.time.LocalDateTime.now;
 import static ru.javawebinar.topjava.MealTestData.*;
+import static ru.javawebinar.topjava.UserTestData.ADMIN_ID;
 import static ru.javawebinar.topjava.UserTestData.USER_ID;
 
 /**
@@ -115,4 +117,19 @@ public class MealServiceTest {
         MATCHER.assertEquals(updated, service.get(MEALS.get(0).getId(), USER_ID));
     }
 
+    @Test(expected = NotFoundException.class)
+    public void deleteFromAnotherUser() {
+        service.delete(MEAL100007_ID, ADMIN_ID);
+    }
+
+    @Test(expected = NotFoundException.class)
+    public void updateFromAnotherUser() {
+        Meal meal = service.get(MEAL100002_ID, USER_ID);
+        service.update(meal, ADMIN_ID);
+    }
+
+    @Test(expected = NotFoundException.class)
+    public void getFromAnotherUser() {
+        service.get(MEAL100007_ID, ADMIN_ID);
+    }
 }
