@@ -19,7 +19,7 @@ public class DbUtil {
         if (connection != null)
             return connection;
         else {
-            try (FileInputStream f = new FileInputStream("src/main/resources/db.properties")) {
+            try (FileInputStream f = new FileInputStream("C:\\Java\\Project\\topjava10\\src\\main\\resources\\db.properties")) {
                 //load properties file
                 Properties prop = new Properties();
                 prop.load(f);

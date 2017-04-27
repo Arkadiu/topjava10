@@ -31,22 +31,22 @@ public class MealServlet extends HttpServlet {
                 .getFilteredWithExceeded(list, LocalTime.MIN, LocalTime.MAX, 2000);
     }
 
-/*    public MealServlet() {
+   public MealServlet() {
         super();
         dao = new MealDao();
     }
 
     private List<MealWithExceed> listFromDb = convertListMeal(dao.getAllMeals());
-*/
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
 
         LOG.debug("redirect to Meals");
-        request.setAttribute("meals", convertListMeal(MealsUtil.getMealIml()));
+        request.setAttribute("meals", listFromDb);
         getServletContext().getRequestDispatcher("/meals.jsp").forward(request, resp);
 
-/*        String forward = "";
+       /* String forward = "";
         String action = request.getParameter("action");
 
         if (action.equalsIgnoreCase("delete")) {
@@ -70,9 +70,9 @@ public class MealServlet extends HttpServlet {
         view.forward(request, resp);*/
     }
 
-/*    @Override
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        LocalDateTime ldt = LocalDateTime.parse(req.getParameter("dateTime"));
+       /* LocalDateTime ldt = LocalDateTime.parse(req.getParameter("dateTime"));
         String description = req.getParameter("description");
         int calories = Integer.parseInt(req.getParameter("calories"));
         Meal meal = new Meal(ldt, description, calories);
@@ -85,6 +85,6 @@ public class MealServlet extends HttpServlet {
         }
         RequestDispatcher view = req.getRequestDispatcher(LIST_MEAL);
         req.setAttribute("meals", listFromDb);
-        view.forward(req, resp);
-    }*/
+        view.forward(req, resp);*/
+    }
 }
