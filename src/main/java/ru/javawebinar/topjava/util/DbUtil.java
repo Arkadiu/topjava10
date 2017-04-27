@@ -1,8 +1,8 @@
 package ru.javawebinar.topjava.util;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -19,10 +19,10 @@ public class DbUtil {
         if (connection != null)
             return connection;
         else {
-            try (FileInputStream f = new FileInputStream("C:\\Java\\Project\\topjava10\\src\\main\\resources\\db.properties")) {
+            try (InputStream inputStream = DbUtil.class.getResourceAsStream("/db.properties")) {
                 //load properties file
                 Properties prop = new Properties();
-                prop.load(f);
+                prop.load(inputStream);
 
                 //asign db parameters
                 String driver = prop.getProperty("driver");
